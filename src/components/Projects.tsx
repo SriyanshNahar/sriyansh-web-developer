@@ -83,9 +83,9 @@ const Projects = () => {
   return (
     <section id="projects" className="section-container">
       <div className={styles.header}>
-        <span className="mono-text accent-text">SELECTED WORK / 2026</span>
-        <h2 className={styles.heading}>BUILT TO BE<br/><em>REMEMBERED.</em></h2>
-        <p className={styles.intro}>A collection of digital products, brand experiences and interfaces shaped around clarity, personality and movement.</p>
+        <span className="mono-text accent-text">SECOND FLOOR // SELECTED PROJECTS</span>
+        <h2 className={styles.heading}>THE PROJECT<br/><em>FLOOR.</em></h2>
+        <p className={styles.intro}>Walk through the second floor to explore websites, products and digital experiences I have designed and built.</p>
       </div>
 
       <div className={styles.container}>
