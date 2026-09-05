@@ -83,8 +83,9 @@ const Projects = () => {
   return (
     <section id="projects" className="section-container">
       <div className={styles.header}>
-        <span className="mono-text accent-text">03 // THE FLEET</span>
-        <h2 className={styles.heading}>FEATURED PROJECTS.</h2>
+        <span className="mono-text accent-text">SELECTED WORK / 2026</span>
+        <h2 className={styles.heading}>BUILT TO BE<br/><em>REMEMBERED.</em></h2>
+        <p className={styles.intro}>A collection of digital products, brand experiences and interfaces shaped around clarity, personality and movement.</p>
       </div>
 
       <div className={styles.container}>
@@ -99,7 +100,7 @@ const Projects = () => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               onClick={() => project.link && window.open(project.link, '_blank')}
             >
-              <div className={styles.cardHeader}>
+              <div className={styles.cardHeader}><span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
                 <span className={styles.category}>{project.category}</span>
                 <h3 className={styles.projectTitle}>
                   {project.link ? (
@@ -110,14 +111,8 @@ const Projects = () => {
                     project.title
                   )}
                 </h3>
-              </div>
-              <p className={styles.projectDesc}>{project.description}</p>
-              <div className={styles.tags}>
-                {project.tags.map(tag => (
-                  <span key={tag} className={styles.tag}>{tag}</span>
-                ))}
-              </div>
-            </motion.div>
+              </div><div className={styles.projectBody}><p className={styles.projectDesc}>{project.description}</p>
+              <div className={styles.tags}>{project.tags.map(tag => (<span key={tag} className={styles.tag}>{tag}</span>))}</div>{project.link && <span className={styles.viewProject}>VIEW PROJECT ↗</span>}</div></motion.div>
           ))}
         </div>
 
