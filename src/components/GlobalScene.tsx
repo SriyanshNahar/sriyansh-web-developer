@@ -29,13 +29,14 @@ const ids=['home','about','experience','projects','graphic-design','skills','con
 const ys=[1.5,-5.4,-2.6,.2,3,5.8,8.6];
 function stageFromScroll(){
  const center=window.innerHeight*.5; let best=0,dist=Infinity;
- ids.forEach((id,i)=>{const el=document.getElementById(id);if(!el)return;const r=el.getBoundingClientRect();const d=Math.abs(r.top+r.height*.45-center);if(d<dist){dist=d;best=i;}});
+ ids.forEach((id,i)=>{const el=document.getElementById(id);if(!el)return;const r=el.getBoundingClientRect();const d=Math.abs(r.top+r.height*.5-center);if(d<dist){dist=d;best=i;}});
  return best;
 }
 const Studio=()=>{const root=useRef<THREE.Group>(null);const target=useRef(new THREE.Vector3());useFrame(({camera,mouse},d)=>{
  const stage=stageFromScroll(); const floorY=ys[stage]; const far=stage===0;
- const pos=new THREE.Vector3(mouse.x*.38, far?1.8:floorY, far?23:8.6);
- camera.position.lerp(pos,1-Math.exp(-d*1.55)); target.current.set(0,far?1.6:floorY,0);camera.lookAt(target.current);
+ const pos=new THREE.Vector3(mouse.x*(far?.28:.16), far?1.8:floorY, far?24.5:7.35);
+ camera.position.lerp(pos,1-Math.exp(-d*2.05));
+ target.current.lerp(new THREE.Vector3(0,far?1.6:floorY,0),1-Math.exp(-d*2.2));camera.lookAt(target.current);
  if(root.current)root.current.rotation.y=THREE.MathUtils.lerp(root.current.rotation.y,mouse.x*.03,1-Math.exp(-d*1.8));
  });
  return <group ref={root}>
@@ -46,7 +47,8 @@ const Studio=()=>{const root=useRef<THREE.Group>(null);const target=useRef(new T
    <Room y={3} title="THIRD FLOOR · GRAPHIC DESIGN" sub="THE VISUAL GALLERY" kind="graphics"/>
    <Room y={5.8} title="FOURTH FLOOR · SKILLS" sub="THE TOOLS BEHIND THE WORK" kind="skills"/>
    <Room y={8.6} title="FIFTH FLOOR · CONTACT" sub="LET'S BUILD SOMETHING TOGETHER" kind="contact"/>
-   <M p={[0,10.2,-.5]} s={[9.9,.2,.9]} c="#1a1d23"/>{[-3.5,-2.5,-1.5,-.5,.5,1.5,2.5,3.5].map(x=><M key={x} p={[x,10.7,-.05]} s={[.08,.9,.9]} c="#272a31"/>)}
+   <M p={[0,10.2,-.5]} s={[9.9,.2,.9]} c="#1a1d23"/>
+   {[-6.8,-4,-1.2,1.6,4.4,7.2,10].map((y,i)=><group key={y}><M p={[0,y,-.02]} s={[10.1,.055,.55]} c="#2a2d34"/><M p={[-5.1,y+.55,-.12]} s={[.16,1.05,.7]} c="#11141a"/><M p={[5.1,y+.55,-.12]} s={[.16,1.05,.7]} c="#11141a"/></group>)}{[-3.5,-2.5,-1.5,-.5,.5,1.5,2.5,3.5].map(x=><M key={x} p={[x,10.7,-.05]} s={[.08,.9,.9]} c="#272a31"/>)}
    <T p={[0,11.1,-.15]} size={.22}>ROOFTOP · CLIENT MEETING SPACE</T>
    <M p={[0,-6.95,0]} s={[10.8,.32,3.8]} c="#15171b"/>{[-4.8,-3.6,3.6,4.8].map(x=><Plant key={x} p={[x,-6.55,.65]}/>)}
    <T p={[0,-6.1,.18]} size={.3}>SRIYANSH STUDIO</T><T p={[0,-6.48,.18]} size={.085} color="#b8a88d">CREATIVE MINDS · BOLDER BRANDS</T>
