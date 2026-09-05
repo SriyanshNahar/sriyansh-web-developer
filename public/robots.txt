@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sriyansh-web-developer.netlify.app/sitemap.xml
