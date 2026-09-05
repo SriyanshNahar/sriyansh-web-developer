@@ -105,3 +105,11 @@ body{background:#050609}
 .cinematicLoader p{font:11px var(--font-mono);letter-spacing:.18em;color:#b9aa94}@keyframes load{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 .filmGrain{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:.035;background-image:radial-gradient(#fff .5px,transparent .5px);background-size:4px 4px}
 @media(max-width:700px){.buildingJourney>section{min-height:90vh;background:linear-gradient(180deg,rgba(5,6,9,.65),rgba(5,6,9,.9))}.buildingJourney .section-container{padding:80px 20px}.filmGrain{display:none}}
+
+/* FLOOR-BY-FLOOR CAMERA STAGING */
+.buildingJourney>section{position:relative;isolation:isolate}
+.buildingJourney>section::after{content:attr(id);position:absolute;right:24px;bottom:24px;font:10px var(--font-mono);letter-spacing:.14em;color:rgba(216,185,139,.48)}
+@media(min-width:900px){
+ #about,#experience,#projects,#graphic-design,#skills,#contact{min-height:112vh!important}
+ #about .section-container,#experience .section-container,#projects .section-container,#graphic-design .section-container,#skills .section-container,#contact .section-container{transform:translateX(-3vw)}
+}
