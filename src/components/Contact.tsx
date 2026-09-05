@@ -28,8 +28,8 @@ const Contact = () => {
   return (
     <section id="contact" className="section-container">
       <div className={styles.header}>
-        <span className="mono-text accent-text">04 // THE PIT STOP</span>
-        <h2 className={styles.heading}>LET'S BUILD SOMETHING.</h2>
+        <span className="mono-text accent-text">FIFTH FLOOR // CONTACT</span>
+        <h2 className={styles.heading}>LET'S BUILD<br/>SOMETHING TOGETHER.</h2>
       </div>
 
       <div className={styles.grid}>
