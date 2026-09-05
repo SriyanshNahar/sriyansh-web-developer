@@ -3,161 +3,31 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Grid, Sparkles, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
-type V3 = [number, number, number];
+type V3=[number,number,number];
+const M=({p,s,c='#181a20',e}:{p:V3;s:V3;c?:string;e?:string})=><mesh position={p}><boxGeometry args={s}/><meshStandardMaterial color={c} emissive={e||'#000'} emissiveIntensity={e?.startsWith('#')?.valueOf()?0.18:0} metalness={0.35} roughness={0.42}/></mesh>;
+const Label=({p,children,size=.18,color='#f4e6cf'}:{p:V3;children:string;size?:number;color?:string})=><Text position={p} fontSize={size} color={color} anchorX="center" anchorY="middle" letterSpacing={0.04}>{children}</Text>;
 
-const Glass = ({ position, size }: { position: V3; size: V3 }) => (
-  <mesh position={position}>
-    <boxGeometry args={size} />
-    <meshStandardMaterial color="#101319" metalness={0.25} roughness={0.12} transparent opacity={0.72} />
-  </mesh>
-);
+const Plant=({p}:{p:V3})=><group position={p}><M p={[0,.18,0]} s={[.32,.36,.32]} c="#1c1d20"/>{[-.22,-.1,0,.1,.22].map((x,i)=><M key={i} p={[x,.55+Math.abs(x)*.35,0]} s={[.08,.55,.05]} c="#253b27"/>)}</group>;
+const Desk=({p}:{p:V3})=><group position={p}><M p={[0,.46,0]} s={[2.6,.1,.75]} c="#211c17"/><M p={[-1.12,.2,0]} s={[.08,.52,.55]} c="#15161a"/><M p={[1.12,.2,0]} s={[.08,.52,.55]} c="#15161a"/><M p={[-.48,.95,-.05]} s={[.9,.56,.06]} c="#11151b" e="#0a1728"/><M p={[.48,.95,-.05]} s={[.9,.56,.06]} c="#11151b" e="#151025"/><Label p={[-.48,.96,.01]} size={.075}>DESIGN</Label><Label p={[.48,.96,.01]} size={.075}>CREATE</Label></group>;
+const Lounge=({p}:{p:V3})=><group position={p}><M p={[-.8,.35,0]} s={[1.25,.7,.75]} c="#1a1a1d"/><M p={[.8,.35,0]} s={[1.25,.7,.75]} c="#1a1a1d"/><M p={[0,.22,.65]} s={[1.1,.35,.7]} c="#28221c"/><Plant p={[-1.55,.1,.4]}/><Plant p={[1.55,.1,.4]}/></group>;
+const Shelf=({p}:{p:V3})=><group position={p}><M p={[0,1.15,0]} s={[.12,2.3,.4]} c="#18191e"/>{[.3,.8,1.3,1.8].map((y,i)=><M key={i} p={[.22,y,0]} s={[.58,.05,.38]} c="#4a351e"/>)}</group>;
 
-const Sign = ({ position, title, sub, scale = 0.18 }: { position: V3; title: string; sub?: string; scale?: number }) => (
-  <group position={position}>
-    <Text fontSize={scale} color="#f3e6d0" anchorX="center" anchorY="middle">{title}</Text>
-    {sub ? <Text position={[0, -scale * 1.5, 0.02]} fontSize={scale * 0.34} color="#c5a878" anchorX="center" anchorY="middle" letterSpacing={0.08}>{sub}</Text> : null}
-  </group>
-);
-
-const Poster = ({ position, title, accent }: { position: V3; title: string; accent: string }) => (
-  <group position={position}>
-    <mesh>
-      <boxGeometry args={[1.05, 1.35, 0.04]} />
-      <meshStandardMaterial color={accent} emissive={accent} emissiveIntensity={0.08} roughness={0.42} />
-    </mesh>
-    <Text position={[0, 0.08, 0.035]} fontSize={0.13} color="#fff" anchorX="center">{title}</Text>
-    <Text position={[0, -0.16, 0.035]} fontSize={0.055} color="#fff" anchorX="center">SRIYANSH STUDIO</Text>
-  </group>
-);
-
-const FloorFrame = ({ y, label, room, posters }: { y: number; label: string; room: string; posters?: [string, string][] }) => (
-  <group position={[0, y, 0]}>
-    <mesh position={[0, 0, -0.58]}>
-      <boxGeometry args={[9.2, 2.7, 0.5]} />
-      <meshStandardMaterial color="#111318" metalness={0.45} roughness={0.45} />
-    </mesh>
-    <Glass position={[0, 0, -0.26]} size={[8.45, 2.28, 0.08]} />
-    <mesh position={[0, 1.35, -0.18]}>
-      <boxGeometry args={[9.45, 0.16, 0.7]} />
-      <meshStandardMaterial color="#1a1c22" metalness={0.6} roughness={0.35} />
-    </mesh>
-    <mesh position={[0, -1.35, -0.18]}>
-      <boxGeometry args={[9.45, 0.13, 0.7]} />
-      <meshStandardMaterial color="#17191e" metalness={0.5} roughness={0.4} />
-    </mesh>
-
-    <group position={[0, 0.95, 0.02]}>
-      <Sign position={[0, 0, 0]} title={label} sub={room} scale={0.18} />
-    </group>
-
-    <pointLight position={[-3.2, 0.5, 1.1]} intensity={2.2} color="#d89a4b" distance={6} />
-    <pointLight position={[3.2, 0.3, 1.1]} intensity={1.8} color="#ffd4a1" distance={6} />
-
-    {posters?.map(([title, accent], i) => (
-      <Poster key={title} position={[-2.9 + i * 1.9, -0.18, -0.18]} title={title} accent={accent} />
-    ))}
-
-    <mesh position={[0, -0.65, 0.25]}>
-      <boxGeometry args={[6.6, 0.12, 0.65]} />
-      <meshStandardMaterial color="#252017" metalness={0.35} roughness={0.35} />
-    </mesh>
-  </group>
-);
-
-const Studio = () => {
-  const root = useRef<THREE.Group>(null);
-  const target = useRef(new THREE.Vector3());
-
-  useFrame(({ camera, mouse }, delta) => {
-    const max = Math.max(1, document.body.scrollHeight - window.innerHeight);
-    const p = Math.min(1, window.scrollY / max);
-
-    const desired = new THREE.Vector3(
-      THREE.MathUtils.lerp(0, mouse.x * 0.42, 0.7),
-      THREE.MathUtils.lerp(1.8, 2.6, p),
-      THREE.MathUtils.lerp(14.2, 7.2, Math.min(1, p * 1.5))
-    );
-
-    camera.position.lerp(desired, 1 - Math.exp(-delta * 1.35));
-    target.current.set(0, THREE.MathUtils.lerp(0.7, 2.6, p * 0.78), 0);
-    camera.lookAt(target.current);
-
-    if (root.current) {
-      root.current.rotation.y = THREE.MathUtils.lerp(root.current.rotation.y, mouse.x * 0.045, 1 - Math.exp(-delta * 1.8));
-      root.current.position.y = THREE.MathUtils.lerp(root.current.position.y, -p * 0.18, 1 - Math.exp(-delta));
-    }
-  });
-
-  return (
-    <group ref={root} position={[0, 0, 0]}>
-      <mesh position={[-3.8, 3.95, -0.78]}>
-        <boxGeometry args={[1.35, 7.5, 0.72]} />
-        <meshStandardMaterial color="#0c0e12" metalness={0.58} roughness={0.36} />
-      </mesh>
-      <Sign position={[-3.8, 5.15, -0.36]} title="SN" sub="STUDIO" scale={0.52} />
-      <Text position={[-3.8, 3.85, -0.34]} fontSize={0.12} color="#d7c5a6" anchorX="center">DESIGN · CREATE · GROW</Text>
-      <Text position={[-3.8, 2.7, -0.34]} fontSize={0.095} color="#8f939c" anchorX="center" lineHeight={1.5}>A CREATIVE STUDIO{'
-'}FOR BIGGER IDEAS</Text>
-
-      <FloorFrame
-        y={-1.65}
-        label="WELCOME TO SRIYANSH STUDIO"
-        room="GROUND FLOOR · CLIENT EXPERIENCE"
-        posters={[['BRAND', '#a86b35'], ['IDENTITY', '#6a4ba0'], ['IDEAS', '#455f96']]}
-      />
-      <FloorFrame
-        y={1.15}
-        label="THE DESIGN FLOOR"
-        room="FIRST FLOOR · GRAPHIC DESIGN STUDIO"
-        posters={[['FORM', '#2d5cff'], ['MOVE', '#a64de0'], ['MAKE', '#d36b36']]}
-      />
-      <FloorFrame
-        y={3.95}
-        label="3D · WEB · MOTION"
-        room="SECOND FLOOR · CREATIVE LAB"
-        posters={[['BUILD', '#198d91'], ['CODE', '#3150d0'], ['IMPACT', '#c55c6a']]}
-      />
-
-      <mesh position={[0, 5.48, -0.52]}>
-        <boxGeometry args={[9.5, 0.18, 0.85]} />
-        <meshStandardMaterial color="#191b20" metalness={0.65} roughness={0.28} />
-      </mesh>
-      <Sign position={[1.1, 5.78, -0.28]} title="IDEAS LIVE HERE" scale={0.18} />
-
-      <mesh position={[0, -3.15, 0]}>
-        <boxGeometry args={[10.6, 0.28, 3.3]} />
-        <meshStandardMaterial color="#161719" roughness={0.55} metalness={0.35} />
-      </mesh>
-      <mesh position={[0, -2.75, -0.18]}>
-        <boxGeometry args={[4.6, 0.12, 1.2]} />
-        <meshStandardMaterial color="#c7a170" emissive="#4a321a" emissiveIntensity={0.35} />
-      </mesh>
-      <Sign position={[0, -2.15, 0.25]} title="SRIYANSH STUDIO" sub="CREATIVE MINDS · BOLDER BRANDS" scale={0.28} />
-
-      <pointLight position={[-4.5, 5.5, 2]} intensity={3.1} color="#c9863c" distance={8} />
-      <pointLight position={[4.2, 4.2, 1.8]} intensity={2.4} color="#ffbd70" distance={8} />
-    </group>
-  );
+const Room=({y,title,sub,kind}:{y:number;title:string;sub:string;kind:'reception'|'design'|'lab'})=>{
+ const items=kind==='reception'?<><Lounge p={[0,-.5,.25]}/><M p={[0,.15,-.1]} s={[2.6,.5,.5]} c="#201b17"/><Label p={[0,.28,.18]} size={.15}>WELCOME</Label><Plant p={[-3,-.7,.2]}/><Plant p={[3,-.7,.2]}/></>:kind==='design'?<><Desk p={[0,-.55,.25]}/><Shelf p={[-3,-.85,-.1]}/><Shelf p={[3,-.85,-.1]}/><Plant p={[-2.1,-.8,.2]}/><Plant p={[2.1,-.8,.2]}/></>:<><Desk p={[0,-.55,.25]}/><M p={[-2.5,-.05,.05]} s={[1.15,.8,.08]} c="#0b1720" e="#12445a"/><M p={[2.5,-.05,.05]} s={[1.15,.8,.08]} c="#151022" e="#3a1b58"/><Label p={[-2.5,-.02,.1]} size={.11}>3D</Label><Label p={[2.5,-.02,.1]} size={.11}>WEB</Label></>;
+ return <group position={[0,y,0]}><M p={[0,0,-.68]} s={[9.5,2.7,.55]} c="#0e1014"/><M p={[0,0,-.35]} s={[8.8,2.35,.06]} c="#10141a"/><M p={[0,1.38,-.22]} s={[9.7,.16,.7]} c="#1a1c22"/><M p={[0,-1.38,-.22]} s={[9.7,.13,.7]} c="#17191f"/><M p={[-4.45,0,-.08]} s={[.13,2.65,.65]} c="#25272d"/><M p={[4.45,0,-.08]} s={[.13,2.65,.65]} c="#25272d"/>
+ <Label p={[0,1.02,-.1]} size={.2}>{title}</Label><Label p={[0,.72,-.1]} size={.08} color="#b9a98f">{sub}</Label>{items}
+ <pointLight position={[-3,0.55,1.2]} intensity={2.4} color="#d68c42" distance={5}/><pointLight position={[3,.55,1.2]} intensity={2.1} color="#ffd6a0" distance={5}/>
+ </group>
 };
 
-const Scene = () => (
-  <>
-    <fog attach="fog" args={['#060608', 12, 30]} />
-    <ambientLight intensity={0.5} />
-    <directionalLight position={[4, 8, 6]} intensity={1.25} color="#f3e8d6" />
-    <Studio />
-    <Grid position={[0, -3.32, 0]} args={[36, 36]} cellSize={0.65} cellThickness={0.5} cellColor="#292a31" sectionSize={3.25} sectionThickness={1} sectionColor="#5a5b66" fadeDistance={24} fadeStrength={1.4} infiniteGrid />
-    <Sparkles count={90} scale={[16, 11, 10]} size={1.05} speed={0.2} opacity={0.3} color="#f2d6ae" />
-  </>
-);
+const Studio=()=>{const root=useRef<THREE.Group>(null);const target=useRef(new THREE.Vector3());useFrame(({camera,mouse},d)=>{const max=Math.max(1,document.body.scrollHeight-window.innerHeight),p=Math.min(1,window.scrollY/max);const z=THREE.MathUtils.lerp(15.2,7.4,p),y=THREE.MathUtils.lerp(1.7,2.1,p);camera.position.lerp(new THREE.Vector3(mouse.x*.35,y,z),1-Math.exp(-d*1.45));target.current.set(0,THREE.MathUtils.lerp(.8,2.3,p),0);camera.lookAt(target.current);if(root.current)root.current.rotation.y=THREE.MathUtils.lerp(root.current.rotation.y,mouse.x*.035,1-Math.exp(-d*2));});return <group ref={root}>
+ <M p={[-3.95,2.05,-.8]} s={[1.35,7.8,.72]} c="#090b0f"/><Label p={[-3.95,3.45,-.38]} size={.56}>SN</Label><Label p={[-3.95,2.75,-.38]} size={.12}>STUDIO</Label><Label p={[-3.95,1.85,-.38]} size={.08} color="#a5a7ad">DESIGN · CREATE · GROW</Label>
+ <Room y={-1.65} title="WELCOME TO SRIYANSH STUDIO" sub="GROUND FLOOR · CLIENT EXPERIENCE" kind="reception"/>
+ <Room y={1.15} title="THE DESIGN FLOOR" sub="FIRST FLOOR · GRAPHIC DESIGN STUDIO" kind="design"/>
+ <Room y={3.95} title="3D · WEB · MOTION" sub="SECOND FLOOR · CREATIVE LAB" kind="lab"/>
+ <M p={[0,5.5,-.5]} s={[9.8,.18,.85]} c="#1b1d22"/><Label p={[1.1,5.82,-.25]} size={.18}>IDEAS LIVE HERE</Label>
+ <M p={[0,-3.15,0]} s={[10.8,.3,3.6]} c="#15171b"/><M p={[0,-2.76,-.18]} s={[4.8,.13,1.35]} c="#c49b68" e="#4b2d14"/><Label p={[0,-2.22,.18]} size={.28}>SRIYANSH STUDIO</Label><Label p={[0,-2.56,.18]} size={.09} color="#b7a58a">CREATIVE MINDS · BOLDER BRANDS</Label>
+ </group>};
 
-export default function GlobalScene() {
-  return (
-    <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', zIndex: -1, pointerEvents: 'none' }}>
-      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 1.8, 14.2], fov: 44 }}>
-        <color attach="background" args={['#060608']} />
-        <Scene />
-      </Canvas>
-    </div>
-  );
-}
+const Scene=()=><><fog attach="fog" args={['#050609',12,32]}/><ambientLight intensity={.42}/><directionalLight position={[4,8,6]} intensity={1.15} color="#f0e0c7"/><Studio/><Grid position={[0,-3.32,0]} args={[36,36]} cellSize={.65} cellThickness={.5} cellColor="#252730" sectionSize={3.25} sectionThickness={1} sectionColor="#5b5d69" fadeDistance={24} fadeStrength={1.4} infiniteGrid/><Sparkles count={100} scale={[16,11,10]} size={1.05} speed={.2} opacity={.3} color="#f2d6ae"/></>;
+export default function GlobalScene(){return <div style={{position:'fixed',inset:0,width:'100vw',height:'100vh',zIndex:-1,pointerEvents:'none'}}><Canvas dpr={[1,1.5]} camera={{position:[0,1.7,15.2],fov:44}}><color attach="background" args={['#050609']}/><Scene/></Canvas></div>}
