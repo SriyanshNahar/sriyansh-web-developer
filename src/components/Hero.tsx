@@ -18,21 +18,21 @@ const Hero = () => {
         </motion.div>
 
         <motion.h1 initial={{ opacity: 0, y: 70 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: .1, type: 'spring', bounce: .15 }}>
-          ENTER THE<br />
-          <span>THREE FLOOR</span><br />
+          EXPLORE THE<br />
+          <span>ENTIRE</span><br />
           <em>STUDIO.</em>
         </motion.h1>
 
         <motion.div className={styles.bottomCopy} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .8, delay: .75 }}>
-          <p>Scroll through the building: client experience on the ground floor, graphic design on floor one, and 3D web experiments above.</p>
-          <a href="#projects">ENTER THE STUDIO <b>↘</b></a>
+          <p>Start outside the building. Then scroll floor by floor through my story, experience, projects, graphic design, skills and the rooftop contact space.</p>
+          <a href="#about">ENTER THE BUILDING <b>↘</b></a>
         </motion.div>
       </motion.div>
 
       <motion.div className={styles.scrollPanel} style={{ y: panelY }}>
         <span>SCROLL TO EXPLORE</span>
         <div className={styles.progress}><i /></div>
-        <span>01 / 05</span>
+        <span>01 / 07</span>
       </motion.div>
     </section>
   );
