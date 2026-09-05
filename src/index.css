@@ -85,3 +85,23 @@ button {
 
 /* FIND-inspired studio canvas: clean editorial layers over the interactive horizon */
 html{scroll-snap-type:none} body{background:#060608} main{position:relative;z-index:1} section{position:relative} #about,#skills,#projects,#contact{background:linear-gradient(180deg,rgba(6,6,8,.45),rgba(6,6,8,.92));backdrop-filter:blur(2px)}
+
+
+/******** FULL 3D STUDIO JOURNEY ********/
+:root{--accent-color:#d8b98b}
+body{background:#050609}
+.studioApp{min-height:100vh;background:#050609}
+.buildingJourney{position:relative;z-index:2}
+.buildingJourney>section{min-height:100vh;display:flex;align-items:center;background:linear-gradient(90deg,rgba(5,6,9,.82),rgba(5,6,9,.28) 50%,rgba(5,6,9,.72));border-top:1px solid rgba(255,255,255,.035)}
+.buildingJourney>#home{min-height:115vh;background:linear-gradient(180deg,rgba(5,6,9,.08),rgba(5,6,9,.35))}
+.buildingJourney .section-container{width:min(1200px,100%);margin:0 auto;padding:10vh 24px}
+#about,#experience,#projects,#graphic-design,#skills,#contact{scroll-margin-top:60px}
+#about::before,#experience::before,#projects::before,#graphic-design::before,#skills::before,#contact::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 18% 50%,rgba(216,185,139,.08),transparent 28%)}
+#about,#experience,#projects,#graphic-design,#skills,#contact{background-color:transparent!important}
+.cinematicLoader{position:fixed;inset:0;z-index:100;background:#050609;display:grid;place-items:center;align-content:center;gap:1.2rem;transition:opacity .8s ease,visibility .8s ease}
+.cinematicLoaderHidden{opacity:0;visibility:hidden}
+.loaderMark{font:700 3rem var(--font-display);letter-spacing:-.08em;color:#f2e4ce}
+.loaderLine{width:150px;height:1px;background:#27221c;overflow:hidden}.loaderLine span{display:block;width:100%;height:100%;background:#d8b98b;animation:load 1s ease-in-out infinite}
+.cinematicLoader p{font:11px var(--font-mono);letter-spacing:.18em;color:#b9aa94}@keyframes load{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.filmGrain{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:.035;background-image:radial-gradient(#fff .5px,transparent .5px);background-size:4px 4px}
+@media(max-width:700px){.buildingJourney>section{min-height:90vh;background:linear-gradient(180deg,rgba(5,6,9,.65),rgba(5,6,9,.9))}.buildingJourney .section-container{padding:80px 20px}.filmGrain{display:none}}
