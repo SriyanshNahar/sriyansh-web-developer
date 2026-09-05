@@ -1,0 +1,72 @@
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: 4rem 0;
+}
+
+.content {
+  background: var(--surface-color);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  max-width: 800px;
+  width: 100%;
+}
+
+.content h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+}
+
+.content p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.content p strong {
+  color: var(--text-primary);
+}
+
+.formulaContainer {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.formulaLabel {
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  font-size: 0.9rem !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem !important;
+}
+
+.formula {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 2rem;
+  }
+  
+  .content h2 {
+    font-size: 2.5rem;
+  }
+  
+  .formula {
+    font-size: 1.8rem;
+  }
+}

@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.leftBlock {
+  flex: 1;
+  background: var(--surface-color);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.experienceHeader {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.experienceHeader .number {
+  font-size: 8rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  line-height: 1;
+  font-family: var(--font-display);
+}
+
+.experienceTitle {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.experienceDesc {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.rightGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.statCard {
+  background: var(--surface-color);
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-color);
+}
+
+.statCard .number {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+}
+
+.statCard p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 0;
+}
+
+@media (max-width: 968px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .experienceHeader .number {
+    font-size: 6rem;
+  }
+  
+  .experienceTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .rightGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .experienceHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
