@@ -81,3 +81,7 @@ button {
 .accent-text {
   color: var(--accent-color);
 }
+
+
+/* FIND-inspired studio canvas: clean editorial layers over the interactive horizon */
+html{scroll-snap-type:none} body{background:#060608} main{position:relative;z-index:1} section{position:relative} #about,#skills,#projects,#contact{background:linear-gradient(180deg,rgba(6,6,8,.45),rgba(6,6,8,.92));backdrop-filter:blur(2px)}
