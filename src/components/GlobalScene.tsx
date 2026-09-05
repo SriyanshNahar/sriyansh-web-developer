@@ -11,10 +11,23 @@ const Plant=({p}:{p:V3})=><group position={p}><M p={[0,.18,0]} s={[.32,.36,.32]}
 const Desk=({p}:{p:V3})=><group position={p}><M p={[0,.46,0]} s={[2.6,.1,.75]} c="#211c17"/><M p={[-1.12,.2,0]} s={[.08,.52,.55]} c="#15161a"/><M p={[1.12,.2,0]} s={[.08,.52,.55]} c="#15161a"/><M p={[-.48,.95,-.05]} s={[.9,.56,.06]} c="#11151b" e="#0a1728"/><M p={[.48,.95,-.05]} s={[.9,.56,.06]} c="#11151b" e="#151025"/><Label p={[-.48,.96,.01]} size={.075}>DESIGN</Label><Label p={[.48,.96,.01]} size={.075}>CREATE</Label></group>;
 const Lounge=({p}:{p:V3})=><group position={p}><M p={[-.8,.35,0]} s={[1.25,.7,.75]} c="#1a1a1d"/><M p={[.8,.35,0]} s={[1.25,.7,.75]} c="#1a1a1d"/><M p={[0,.22,.65]} s={[1.1,.35,.7]} c="#28221c"/><Plant p={[-1.55,.1,.4]}/><Plant p={[1.55,.1,.4]}/></group>;
 const Shelf=({p}:{p:V3})=><group position={p}><M p={[0,1.15,0]} s={[.12,2.3,.4]} c="#18191e"/>{[.3,.8,1.3,1.8].map((y,i)=><M key={i} p={[.22,y,0]} s={[.58,.05,.38]} c="#4a351e"/>)}</group>;
+const Facade=({y}:{y:number})=><group position={[0,y,.08]}>
+  {[-3.3,-2.2,-1.1,0,1.1,2.2,3.3].map(x=><M key={x} p={[x,0,0]} s={[.055,2.18,.18]} c="#24272d"/>)}
+  <M p={[0,-1.12,0]} s={[8.7,.05,.16]} c="#262a31"/>
+</group>;
+const Steps=()=> <group position={[0,-3.03,1.05]}>{[0,1,2,3,4].map(i=><M key={i} p={[0,i*.11,-i*.14]} s={[5.2-i*.32,.12,.42]} c="#3a3126" e="#2a1c0f"/>)}</group>;
+const Pergola=()=> <group position={[0,6.05,-.05]}><M p={[0,0,0]} s={[8.8,.12,.75]} c="#17191f"/>{[-3.5,-2.5,-1.5,-.5,.5,1.5,2.5,3.5].map(x=><M key={x} p={[x,.48,0]} s={[.08,.9,.9]} c="#24272b"/>)}</group>;
+const ExteriorDetails=()=> <><Steps/><Pergola/>
+  <M p={[-5.35,-1.45,-.4]} s={[.35,2.1,1.15]} c="#101217"/><Label p={[-5.35,-.8,.2]} size={.09}>CREATIVE</Label><Label p={[-5.35,-1.05,.2]} size={.09}>DESIGN</Label>
+  <M p={[5.25,-.35,-.35]} s={[.35,3.4,1.05]} c="#111318"/><Label p={[5.25,.35,.18]} size={.1}>TURNING</Label><Label p={[5.25,.08,.18]} size={.1}>IDEAS</Label><Label p={[5.25,-.19,.18]} size={.1}>IMPACT</Label>
+  {[-4.9,-3.5,3.5,4.9].map((x,i)=><Plant key={i} p={[x,-2.92,.72]}/>)}
+  <M p={[-6.1,-3.02,.25]} s={[1.55,.7,.42]} c="#3a332a"/><Label p={[-6.1,-2.94,.48]} size={.16}>SN STUDIO</Label>
+  <M p={[6.1,-3.02,.25]} s={[1.55,.7,.42]} c="#3a332a"/><Label p={[6.1,-2.94,.48]} size={.12}>IDEAS BUILD</Label>
+</>;
 
 const Room=({y,title,sub,kind}:{y:number;title:string;sub:string;kind:'reception'|'design'|'lab'})=>{
  const items=kind==='reception'?<><Lounge p={[0,-.5,.25]}/><M p={[0,.15,-.1]} s={[2.6,.5,.5]} c="#201b17"/><Label p={[0,.28,.18]} size={.15}>WELCOME</Label><Plant p={[-3,-.7,.2]}/><Plant p={[3,-.7,.2]}/></>:kind==='design'?<><Desk p={[0,-.55,.25]}/><Shelf p={[-3,-.85,-.1]}/><Shelf p={[3,-.85,-.1]}/><Plant p={[-2.1,-.8,.2]}/><Plant p={[2.1,-.8,.2]}/></>:<><Desk p={[0,-.55,.25]}/><M p={[-2.5,-.05,.05]} s={[1.15,.8,.08]} c="#0b1720" e="#12445a"/><M p={[2.5,-.05,.05]} s={[1.15,.8,.08]} c="#151022" e="#3a1b58"/><Label p={[-2.5,-.02,.1]} size={.11}>3D</Label><Label p={[2.5,-.02,.1]} size={.11}>WEB</Label></>;
- return <group position={[0,y,0]}><M p={[0,0,-.68]} s={[9.5,2.7,.55]} c="#0e1014"/><M p={[0,0,-.35]} s={[8.8,2.35,.06]} c="#10141a"/><M p={[0,1.38,-.22]} s={[9.7,.16,.7]} c="#1a1c22"/><M p={[0,-1.38,-.22]} s={[9.7,.13,.7]} c="#17191f"/><M p={[-4.45,0,-.08]} s={[.13,2.65,.65]} c="#25272d"/><M p={[4.45,0,-.08]} s={[.13,2.65,.65]} c="#25272d"/>
+ return <group position={[0,y,0]}><M p={[0,0,-.68]} s={[9.5,2.7,.55]} c="#0e1014"/><M p={[0,0,-.35]} s={[8.8,2.35,.06]} c="#10141a"/><Facade y={0}/><M p={[0,1.38,-.22]} s={[9.7,.16,.7]} c="#1a1c22"/><M p={[0,-1.38,-.22]} s={[9.7,.13,.7]} c="#17191f"/><M p={[-4.45,0,-.08]} s={[.13,2.65,.65]} c="#25272d"/><M p={[4.45,0,-.08]} s={[.13,2.65,.65]} c="#25272d"/>
  <Label p={[0,1.02,-.1]} size={.2}>{title}</Label><Label p={[0,.72,-.1]} size={.08} color="#b9a98f">{sub}</Label>{items}
  <pointLight position={[-3,0.55,1.2]} intensity={2.4} color="#d68c42" distance={5}/><pointLight position={[3,.55,1.2]} intensity={2.1} color="#ffd6a0" distance={5}/>
  </group>
@@ -25,6 +38,7 @@ const Studio=()=>{const root=useRef<THREE.Group>(null);const target=useRef(new T
  <Room y={-1.65} title="WELCOME TO SRIYANSH STUDIO" sub="GROUND FLOOR · CLIENT EXPERIENCE" kind="reception"/>
  <Room y={1.15} title="THE DESIGN FLOOR" sub="FIRST FLOOR · GRAPHIC DESIGN STUDIO" kind="design"/>
  <Room y={3.95} title="3D · WEB · MOTION" sub="SECOND FLOOR · CREATIVE LAB" kind="lab"/>
+ <ExteriorDetails/>
  <M p={[0,5.5,-.5]} s={[9.8,.18,.85]} c="#1b1d22"/><Label p={[1.1,5.82,-.25]} size={.18}>IDEAS LIVE HERE</Label>
  <M p={[0,-3.15,0]} s={[10.8,.3,3.6]} c="#15171b"/><M p={[0,-2.76,-.18]} s={[4.8,.13,1.35]} c="#c49b68" e="#4b2d14"/><Label p={[0,-2.22,.18]} size={.28}>SRIYANSH STUDIO</Label><Label p={[0,-2.56,.18]} size={.09} color="#b7a58a">CREATIVE MINDS · BOLDER BRANDS</Label>
  </group>};
