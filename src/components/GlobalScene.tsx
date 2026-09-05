@@ -3,9 +3,161 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Grid, Sparkles, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
-const Poster = ({ position, color, label }: { position: [number, number, number], color: string, label: string }) => <group position={position}><mesh><boxGeometry args={[1.35,1.75,.06]}/><meshStandardMaterial color={color} emissive={color} emissiveIntensity={.08} roughness={.45}/></mesh><Text position={[0,.15,.05]} fontSize={.12} color="#fff" anchorX="center">{label}</Text><Text position={[0,-.08,.05]} fontSize={.08} color="#fff" anchorX="center">CREATIVE STUDIO</Text></group>;
+type V3 = [number, number, number];
 
-const Studio=()=>{const studio=useRef<THREE.Group>(null);const sign=useRef<THREE.Group>(null);useFrame(({mouse},delta)=>{const p=Math.min(1,window.scrollY/Math.max(1,window.innerHeight*1.4));if(studio.current){studio.current.rotation.y=THREE.MathUtils.lerp(studio.current.rotation.y,mouse.x*.12,delta*1.8);studio.current.position.z=THREE.MathUtils.lerp(studio.current.position.z,.8+p*4.5,delta*1.5);studio.current.position.y=THREE.MathUtils.lerp(studio.current.position.y,-.1-p*.65,delta*1.5);studio.current.scale.setScalar(THREE.MathUtils.lerp(studio.current.scale.x,1+p*.24,delta*1.4));}if(sign.current)sign.current.position.y=1.9+Math.sin(performance.now()*.001)*.035;});return <group ref={studio} position={[0,-.1,.8]}><mesh position={[0,.1,-1.15]}><boxGeometry args={[8.2,4.8,.45]}/><meshStandardMaterial color="#101014" metalness={.5} roughness={.5}/></mesh><mesh position={[0,.1,-.88]}><boxGeometry args={[7.55,4.2,.08]}/><meshStandardMaterial color="#050507" roughness={.25} metalness={.2}/></mesh><group ref={sign} position={[0,1.9,-.78]}><Text fontSize={.38} color="#f5f4ef" letterSpacing={.04} anchorX="center">SRIYANSH STUDIO</Text><Text position={[0,-.38,0]} fontSize={.09} color="#a8a8b1" letterSpacing={.18} anchorX="center">GRAPHIC DESIGN · DIGITAL EXPERIENCES</Text></group><Poster position={[-2.55,-.25,-.72]} color="#1f3cff" label="FORM"/><Poster position={[-.85,-.25,-.72]} color="#c34dff" label="MOVE"/><Poster position={[.85,-.25,-.72]} color="#ff6d2e" label="MAKE"/><Poster position={[2.55,-.25,-.72]} color="#e8e5da" label="LOOK"/><mesh position={[0,-2.15,-.55]}><boxGeometry args={[8.7,.22,2.1]}/><meshStandardMaterial color="#16161b" roughness={.55} metalness={.25}/></mesh><pointLight position={[-3,1,2]} intensity={3} color="#6d7cff" distance={7}/><pointLight position={[3,1,2]} intensity={2.5} color="#e47cff" distance={7}/></group>};
+const Glass = ({ position, size }: { position: V3; size: V3 }) => (
+  <mesh position={position}>
+    <boxGeometry args={size} />
+    <meshStandardMaterial color="#101319" metalness={0.25} roughness={0.12} transparent opacity={0.72} />
+  </mesh>
+);
 
-const Scene=()=> <><fog attach="fog" args={['#060608',10,28]}/><ambientLight intensity={.55}/><directionalLight position={[0,6,5]} intensity={1.2}/><Studio/><Grid position={[0,-2.25,0]} args={[30,30]} cellSize={.6} cellThickness={.55} cellColor="#2f3038" sectionSize={3} sectionThickness={1} sectionColor="#777988" fadeDistance={22} fadeStrength={1.4} infiniteGrid/><Sparkles count={70} scale={[14,7,9]} size={1.1} speed={.25} opacity={.32}/></>;
-export default ()=> <div style={{position:'fixed',inset:0,width:'100vw',height:'100vh',zIndex:-1,pointerEvents:'none'}}><Canvas dpr={[1,1.5]} camera={{position:[0,1.25,9.5],fov:46}}><color attach="background" args={['#060608']}/><Scene/></Canvas></div>;
+const Sign = ({ position, title, sub, scale = 0.18 }: { position: V3; title: string; sub?: string; scale?: number }) => (
+  <group position={position}>
+    <Text fontSize={scale} color="#f3e6d0" anchorX="center" anchorY="middle">{title}</Text>
+    {sub ? <Text position={[0, -scale * 1.5, 0.02]} fontSize={scale * 0.34} color="#c5a878" anchorX="center" anchorY="middle" letterSpacing={0.08}>{sub}</Text> : null}
+  </group>
+);
+
+const Poster = ({ position, title, accent }: { position: V3; title: string; accent: string }) => (
+  <group position={position}>
+    <mesh>
+      <boxGeometry args={[1.05, 1.35, 0.04]} />
+      <meshStandardMaterial color={accent} emissive={accent} emissiveIntensity={0.08} roughness={0.42} />
+    </mesh>
+    <Text position={[0, 0.08, 0.035]} fontSize={0.13} color="#fff" anchorX="center">{title}</Text>
+    <Text position={[0, -0.16, 0.035]} fontSize={0.055} color="#fff" anchorX="center">SRIYANSH STUDIO</Text>
+  </group>
+);
+
+const FloorFrame = ({ y, label, room, posters }: { y: number; label: string; room: string; posters?: [string, string][] }) => (
+  <group position={[0, y, 0]}>
+    <mesh position={[0, 0, -0.58]}>
+      <boxGeometry args={[9.2, 2.7, 0.5]} />
+      <meshStandardMaterial color="#111318" metalness={0.45} roughness={0.45} />
+    </mesh>
+    <Glass position={[0, 0, -0.26]} size={[8.45, 2.28, 0.08]} />
+    <mesh position={[0, 1.35, -0.18]}>
+      <boxGeometry args={[9.45, 0.16, 0.7]} />
+      <meshStandardMaterial color="#1a1c22" metalness={0.6} roughness={0.35} />
+    </mesh>
+    <mesh position={[0, -1.35, -0.18]}>
+      <boxGeometry args={[9.45, 0.13, 0.7]} />
+      <meshStandardMaterial color="#17191e" metalness={0.5} roughness={0.4} />
+    </mesh>
+
+    <group position={[0, 0.95, 0.02]}>
+      <Sign position={[0, 0, 0]} title={label} sub={room} scale={0.18} />
+    </group>
+
+    <pointLight position={[-3.2, 0.5, 1.1]} intensity={2.2} color="#d89a4b" distance={6} />
+    <pointLight position={[3.2, 0.3, 1.1]} intensity={1.8} color="#ffd4a1" distance={6} />
+
+    {posters?.map(([title, accent], i) => (
+      <Poster key={title} position={[-2.9 + i * 1.9, -0.18, -0.18]} title={title} accent={accent} />
+    ))}
+
+    <mesh position={[0, -0.65, 0.25]}>
+      <boxGeometry args={[6.6, 0.12, 0.65]} />
+      <meshStandardMaterial color="#252017" metalness={0.35} roughness={0.35} />
+    </mesh>
+  </group>
+);
+
+const Studio = () => {
+  const root = useRef<THREE.Group>(null);
+  const target = useRef(new THREE.Vector3());
+
+  useFrame(({ camera, mouse }, delta) => {
+    const max = Math.max(1, document.body.scrollHeight - window.innerHeight);
+    const p = Math.min(1, window.scrollY / max);
+
+    const desired = new THREE.Vector3(
+      THREE.MathUtils.lerp(0, mouse.x * 0.42, 0.7),
+      THREE.MathUtils.lerp(1.8, 2.6, p),
+      THREE.MathUtils.lerp(14.2, 7.2, Math.min(1, p * 1.5))
+    );
+
+    camera.position.lerp(desired, 1 - Math.exp(-delta * 1.35));
+    target.current.set(0, THREE.MathUtils.lerp(0.7, 2.6, p * 0.78), 0);
+    camera.lookAt(target.current);
+
+    if (root.current) {
+      root.current.rotation.y = THREE.MathUtils.lerp(root.current.rotation.y, mouse.x * 0.045, 1 - Math.exp(-delta * 1.8));
+      root.current.position.y = THREE.MathUtils.lerp(root.current.position.y, -p * 0.18, 1 - Math.exp(-delta));
+    }
+  });
+
+  return (
+    <group ref={root} position={[0, 0, 0]}>
+      <mesh position={[-3.8, 3.95, -0.78]}>
+        <boxGeometry args={[1.35, 7.5, 0.72]} />
+        <meshStandardMaterial color="#0c0e12" metalness={0.58} roughness={0.36} />
+      </mesh>
+      <Sign position={[-3.8, 5.15, -0.36]} title="SN" sub="STUDIO" scale={0.52} />
+      <Text position={[-3.8, 3.85, -0.34]} fontSize={0.12} color="#d7c5a6" anchorX="center">DESIGN · CREATE · GROW</Text>
+      <Text position={[-3.8, 2.7, -0.34]} fontSize={0.095} color="#8f939c" anchorX="center" lineHeight={1.5}>A CREATIVE STUDIO{'
+'}FOR BIGGER IDEAS</Text>
+
+      <FloorFrame
+        y={-1.65}
+        label="WELCOME TO SRIYANSH STUDIO"
+        room="GROUND FLOOR · CLIENT EXPERIENCE"
+        posters={[['BRAND', '#a86b35'], ['IDENTITY', '#6a4ba0'], ['IDEAS', '#455f96']]}
+      />
+      <FloorFrame
+        y={1.15}
+        label="THE DESIGN FLOOR"
+        room="FIRST FLOOR · GRAPHIC DESIGN STUDIO"
+        posters={[['FORM', '#2d5cff'], ['MOVE', '#a64de0'], ['MAKE', '#d36b36']]}
+      />
+      <FloorFrame
+        y={3.95}
+        label="3D · WEB · MOTION"
+        room="SECOND FLOOR · CREATIVE LAB"
+        posters={[['BUILD', '#198d91'], ['CODE', '#3150d0'], ['IMPACT', '#c55c6a']]}
+      />
+
+      <mesh position={[0, 5.48, -0.52]}>
+        <boxGeometry args={[9.5, 0.18, 0.85]} />
+        <meshStandardMaterial color="#191b20" metalness={0.65} roughness={0.28} />
+      </mesh>
+      <Sign position={[1.1, 5.78, -0.28]} title="IDEAS LIVE HERE" scale={0.18} />
+
+      <mesh position={[0, -3.15, 0]}>
+        <boxGeometry args={[10.6, 0.28, 3.3]} />
+        <meshStandardMaterial color="#161719" roughness={0.55} metalness={0.35} />
+      </mesh>
+      <mesh position={[0, -2.75, -0.18]}>
+        <boxGeometry args={[4.6, 0.12, 1.2]} />
+        <meshStandardMaterial color="#c7a170" emissive="#4a321a" emissiveIntensity={0.35} />
+      </mesh>
+      <Sign position={[0, -2.15, 0.25]} title="SRIYANSH STUDIO" sub="CREATIVE MINDS · BOLDER BRANDS" scale={0.28} />
+
+      <pointLight position={[-4.5, 5.5, 2]} intensity={3.1} color="#c9863c" distance={8} />
+      <pointLight position={[4.2, 4.2, 1.8]} intensity={2.4} color="#ffbd70" distance={8} />
+    </group>
+  );
+};
+
+const Scene = () => (
+  <>
+    <fog attach="fog" args={['#060608', 12, 30]} />
+    <ambientLight intensity={0.5} />
+    <directionalLight position={[4, 8, 6]} intensity={1.25} color="#f3e8d6" />
+    <Studio />
+    <Grid position={[0, -3.32, 0]} args={[36, 36]} cellSize={0.65} cellThickness={0.5} cellColor="#292a31" sectionSize={3.25} sectionThickness={1} sectionColor="#5a5b66" fadeDistance={24} fadeStrength={1.4} infiniteGrid />
+    <Sparkles count={90} scale={[16, 11, 10]} size={1.05} speed={0.2} opacity={0.3} color="#f2d6ae" />
+  </>
+);
+
+export default function GlobalScene() {
+  return (
+    <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', zIndex: -1, pointerEvents: 'none' }}>
+      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 1.8, 14.2], fov: 44 }}>
+        <color attach="background" args={['#060608']} />
+        <Scene />
+      </Canvas>
+    </div>
+  );
+}
