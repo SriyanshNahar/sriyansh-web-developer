@@ -1,69 +1,11 @@
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Grid, Sparkles } from '@react-three/drei';
+import { Grid, Sparkles, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
-const SceneContent = () => {
-  const rig = useRef<THREE.Group>(null);
-  const ringA = useRef<THREE.Mesh>(null);
-  const ringB = useRef<THREE.Mesh>(null);
+const Poster = ({ position, color, label }: { position: [number, number, number], color: string, label: string }) => <group position={position}><mesh><boxGeometry args={[1.35,1.75,.06]}/><meshStandardMaterial color={color} emissive={color} emissiveIntensity={.08} roughness={.45}/></mesh><Text position={[0,.15,.05]} fontSize={.12} color="#fff" anchorX="center">{label}</Text><Text position={[0,-.08,.05]} fontSize={.08} color="#fff" anchorX="center">CREATIVE STUDIO</Text></group>;
 
-  useFrame(({ mouse }, delta) => {
-    const progress = Math.min(1, window.scrollY / Math.max(1, window.innerHeight * 5));
-    if (rig.current) {
-      rig.current.rotation.y = THREE.MathUtils.lerp(rig.current.rotation.y, mouse.x * 0.12 + progress * 0.35, delta * 2);
-      rig.current.rotation.x = THREE.MathUtils.lerp(rig.current.rotation.x, -mouse.y * 0.06, delta * 2);
-      rig.current.position.y = THREE.MathUtils.lerp(rig.current.position.y, -progress * 1.6, delta * 1.8);
-    }
-    if (ringA.current) ringA.current.rotation.z += delta * 0.08;
-    if (ringB.current) ringB.current.rotation.z -= delta * 0.05;
-  });
+const Studio=()=>{const studio=useRef<THREE.Group>(null);const sign=useRef<THREE.Group>(null);useFrame(({mouse},delta)=>{const p=Math.min(1,window.scrollY/Math.max(1,window.innerHeight*1.4));if(studio.current){studio.current.rotation.y=THREE.MathUtils.lerp(studio.current.rotation.y,mouse.x*.12,delta*1.8);studio.current.position.z=THREE.MathUtils.lerp(studio.current.position.z,.8+p*4.5,delta*1.5);studio.current.position.y=THREE.MathUtils.lerp(studio.current.position.y,-.1-p*.65,delta*1.5);studio.current.scale.setScalar(THREE.MathUtils.lerp(studio.current.scale.x,1+p*.24,delta*1.4));}if(sign.current)sign.current.position.y=1.9+Math.sin(performance.now()*.001)*.035;});return <group ref={studio} position={[0,-.1,.8]}><mesh position={[0,.1,-1.15]}><boxGeometry args={[8.2,4.8,.45]}/><meshStandardMaterial color="#101014" metalness={.5} roughness={.5}/></mesh><mesh position={[0,.1,-.88]}><boxGeometry args={[7.55,4.2,.08]}/><meshStandardMaterial color="#050507" roughness={.25} metalness={.2}/></mesh><group ref={sign} position={[0,1.9,-.78]}><Text fontSize={.38} color="#f5f4ef" letterSpacing={.04} anchorX="center">SRIYANSH STUDIO</Text><Text position={[0,-.38,0]} fontSize={.09} color="#a8a8b1" letterSpacing={.18} anchorX="center">GRAPHIC DESIGN · DIGITAL EXPERIENCES</Text></group><Poster position={[-2.55,-.25,-.72]} color="#1f3cff" label="FORM"/><Poster position={[-.85,-.25,-.72]} color="#c34dff" label="MOVE"/><Poster position={[.85,-.25,-.72]} color="#ff6d2e" label="MAKE"/><Poster position={[2.55,-.25,-.72]} color="#e8e5da" label="LOOK"/><mesh position={[0,-2.15,-.55]}><boxGeometry args={[8.7,.22,2.1]}/><meshStandardMaterial color="#16161b" roughness={.55} metalness={.25}/></mesh><pointLight position={[-3,1,2]} intensity={3} color="#6d7cff" distance={7}/><pointLight position={[3,1,2]} intensity={2.5} color="#e47cff" distance={7}/></group>};
 
-  return (
-    <>
-      <fog attach="fog" args={['#060608', 8, 28]} />
-      <ambientLight intensity={0.7} />
-      <pointLight position={[0, 4, 2]} intensity={7} color="#ffffff" distance={18} />
-      <pointLight position={[-7, -2, 5]} intensity={4} color="#5b72ff" distance={16} />
-      <pointLight position={[7, 0, 3]} intensity={3} color="#c064ff" distance={14} />
-
-      <group ref={rig}>
-        <Grid
-          position={[0, -2.6, 0]}
-          args={[30, 30]}
-          cellSize={0.55}
-          cellThickness={0.65}
-          cellColor="#394050"
-          sectionSize={3}
-          sectionThickness={1.1}
-          sectionColor="#d8dbe8"
-          fadeDistance={24}
-          fadeStrength={1.5}
-          infiniteGrid
-        />
-
-        <mesh ref={ringA} position={[0, 1.2, -4.5]} rotation={[Math.PI / 2.7, 0, 0]}>
-          <torusGeometry args={[3.8, 0.012, 12, 120]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.18} />
-        </mesh>
-        <mesh ref={ringB} position={[0, 1.2, -4.8]} rotation={[Math.PI / 2.7, 0, 0]}>
-          <torusGeometry args={[5.8, 0.008, 12, 120]} />
-          <meshBasicMaterial color="#7d8cff" transparent opacity={0.12} />
-        </mesh>
-      </group>
-
-      <Sparkles count={110} scale={[15, 8, 10]} size={1.2} speed={0.35} opacity={0.45} color="#ffffff" />
-    </>
-  );
-};
-
-const GlobalScene = () => (
-  <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', zIndex: -1, pointerEvents: 'none' }}>
-    <Canvas dpr={[1, 1.5]} camera={{ position: [0, 2.2, 9], fov: 47 }}>
-      <color attach="background" args={['#060608']} />
-      <SceneContent />
-    </Canvas>
-  </div>
-);
-
-export default GlobalScene;
+const Scene=()=> <><fog attach="fog" args={['#060608',10,28]}/><ambientLight intensity={.55}/><directionalLight position={[0,6,5]} intensity={1.2}/><Studio/><Grid position={[0,-2.25,0]} args={[30,30]} cellSize={.6} cellThickness={.55} cellColor="#2f3038" sectionSize={3} sectionThickness={1} sectionColor="#777988" fadeDistance={22} fadeStrength={1.4} infiniteGrid/><Sparkles count={70} scale={[14,7,9]} size={1.1} speed={.25} opacity={.32}/></>;
+export default ()=> <div style={{position:'fixed',inset:0,width:'100vw',height:'100vh',zIndex:-1,pointerEvents:'none'}}><Canvas dpr={[1,1.5]} camera={{position:[0,1.25,9.5],fov:46}}><color attach="background" args={['#060608']}/><Scene/></Canvas></div>;
