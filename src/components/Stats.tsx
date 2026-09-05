@@ -46,7 +46,7 @@ const Stats = () => {
         >
           <div className={styles.experienceHeader}>
             <Counter from={0} to={9} duration={2} />
-            <h2 className={styles.experienceTitle}>Month Of<br/>Experience</h2>
+            <h2 className={styles.experienceTitle}>MONTHS OF<br/>CREATIVE WORK</h2>
           </div>
           <p className={styles.experienceDesc}>
             Provide expert advice, create websites, edit graphics/photos, handle marketing, and hiring posts to improve performance, efficiency, and online presence.
@@ -63,7 +63,7 @@ const Stats = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <Counter from={0} to={10} suffix="+" />
-            <p>Our Project Complete</p>
+            <p>PROJECTS & EXPERIENCES</p>
           </motion.div>
 
           <motion.div 
@@ -74,7 +74,7 @@ const Stats = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Counter from={0} to={10} suffix="+" />
-            <p>Our Graphic Designs</p>
+            <p>DESIGN CONCEPTS CREATED</p>
           </motion.div>
 
           <motion.div 
@@ -85,7 +85,7 @@ const Stats = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <Counter from={0} to={2} suffix="+" />
-            <p>Company Reviews</p>
+            <p>CLIENT & TEAM REVIEWS</p>
           </motion.div>
 
           <motion.div 
@@ -96,7 +96,7 @@ const Stats = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <Counter from={0} to={2} suffix="+" />
-            <p>Satisfied Companies</p>
+            <p>BRANDS & COMPANIES</p>
           </motion.div>
         </div>
 
