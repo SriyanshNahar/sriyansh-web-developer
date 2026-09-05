@@ -18,14 +18,14 @@ const Hero = () => {
         </motion.div>
 
         <motion.h1 initial={{ opacity: 0, y: 70 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: .1, type: 'spring', bounce: .15 }}>
-          FIND WHAT<br />
-          <span>MAKES YOU</span><br />
-          <em>LOOK.</em>
+          ENTER THE<br />
+          <span>THREE FLOOR</span><br />
+          <em>STUDIO.</em>
         </motion.h1>
 
         <motion.div className={styles.bottomCopy} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .8, delay: .75 }}>
-          <p>Graphic design, visual identity and digital experiences built to stop the scroll and stay in the mind.</p>
-          <a href="#projects">EXPLORE THE STUDIO <b>↘</b></a>
+          <p>Scroll through the building: client experience on the ground floor, graphic design on floor one, and 3D web experiments above.</p>
+          <a href="#projects">ENTER THE STUDIO <b>↘</b></a>
         </motion.div>
       </motion.div>
 
