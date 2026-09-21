@@ -93,7 +93,7 @@ body{background:#050609}
 .studioApp{min-height:100vh;background:#050609}
 .buildingJourney{position:relative;z-index:2}
 .buildingJourney>section{min-height:100vh;display:flex;align-items:center;background:linear-gradient(90deg,rgba(5,6,9,.82),rgba(5,6,9,.28) 50%,rgba(5,6,9,.72));border-top:1px solid rgba(255,255,255,.035)}
-.buildingJourney>#home{min-height:115vh;background:linear-gradient(180deg,rgba(5,6,9,.08),rgba(5,6,9,.35))}
+.buildingJourney>#home{min-height:100dvh;background:none}
 .buildingJourney .section-container{width:min(1200px,100%);margin:0 auto;padding:10vh 24px}
 #about,#experience,#projects,#graphic-design,#skills,#contact{scroll-margin-top:60px}
 #about::before,#experience::before,#projects::before,#graphic-design::before,#skills::before,#contact::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 18% 50%,rgba(216,185,139,.08),transparent 28%)}
