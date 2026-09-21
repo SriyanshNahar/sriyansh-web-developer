@@ -29,7 +29,7 @@ const Contact = () => {
     <section id="contact" className="section-container">
       <div className={styles.header}>
         <span className="mono-text accent-text">FIFTH FLOOR // CONTACT</span>
-        <h2 className={styles.heading}>LET'S BUILD<br/>SOMETHING TOGETHER.</h2>
+        <h2 className={styles.heading}>LET'S DESIGN<br/>SOMETHING TOGETHER.</h2>
       </div>
 
       <div className={styles.grid}>
@@ -74,9 +74,12 @@ const Contact = () => {
                 <div className={styles.inputGroup}>
                   <label htmlFor="projectType">Project Type</label>
                   <select id="projectType" name="projectType">
+                    <option value="Brand Identity Design">Brand Identity Design</option>
+                    <option value="Social Media Design">Social Media Design</option>
+                    <option value="Print & Packaging Design">Print & Packaging Design</option>
+                    <option value="UI/UX Design">UI/UX Design</option>
                     <option value="Website Development">Website Development</option>
                     <option value="Online Listing">Online Product Listing</option>
-                    <option value="UI/UX Design">UI/UX Design</option>
                   </select>
                 </div>
                 <div className={styles.rowGrid}>

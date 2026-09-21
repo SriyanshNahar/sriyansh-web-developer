@@ -49,7 +49,7 @@ const Stats = () => {
             <h2 className={styles.experienceTitle}>MONTHS OF<br/>CREATIVE WORK</h2>
           </div>
           <p className={styles.experienceDesc}>
-            Provide expert advice, create websites, edit graphics/photos, handle marketing, and hiring posts to improve performance, efficiency, and online presence.
+            Designing brand identities, social media creatives, print & packaging and UI/UX visuals — then building the websites that showcase them.
           </p>
         </motion.div>
 

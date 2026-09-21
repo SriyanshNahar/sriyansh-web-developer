@@ -14,18 +14,18 @@ const Hero = () => {
       <div className={styles.heroShade} />
       <motion.div className={styles.content} style={{ y, scale, opacity }}>
         <motion.div className={styles.eyebrow} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }}>
-          SRIYANSH NAHAR — CREATIVE STUDIO
+          SRIYANSH NAHAR — GRAPHIC DESIGNER
         </motion.div>
 
         <motion.h1 initial={{ opacity: 0, y: 70 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: .1, type: 'spring', bounce: .15 }}>
-          EXPLORE THE<br />
-          <span>ENTIRE</span><br />
-          <em>STUDIO.</em>
+          I DESIGN<br />
+          <span>VISUALS</span><br />
+          <em>THAT SPEAK.</em>
         </motion.h1>
 
         <motion.div className={styles.bottomCopy} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .8, delay: .75 }}>
-          <p>Start outside the building. Then scroll floor by floor through my story, experience, projects, graphic design, skills and the rooftop contact space.</p>
-          <a href="#about">ENTER THE BUILDING <b>↘</b></a>
+          <p>Start outside the studio. Then scroll floor by floor through my story, experience, graphic design work, web projects, skills and the rooftop contact space.</p>
+          <a href="#about">ENTER THE STUDIO <b>↘</b></a>
         </motion.div>
       </motion.div>
 

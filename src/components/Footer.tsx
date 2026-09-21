@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.top}>
-          <h2 className={styles.logo}>SRIYANSH NAHAR</h2>
+          <div><h2 className={styles.logo}>SRIYANSH NAHAR</h2><p className={styles.tagline}>Graphic Designer & Creative Studio</p></div>
           <div className={styles.socials}>
             <a href="https://www.linkedin.com/in/sriyansh-nahar" target="_blank" rel="noreferrer" className={styles.link}>LinkedIn</a>
             <a href="https://www.instagram.com/sriyanshjain_04/?__pwa=1" target="_blank" rel="noreferrer" className={styles.link}>Instagram</a>

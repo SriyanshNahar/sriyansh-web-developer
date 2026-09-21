@@ -2,9 +2,9 @@ import { motion } from 'framer-motion';
 import styles from './Skills.module.css';
 
 const skillsData = [
-  { category: 'Frontend', items: ['Angular', 'TypeScript', 'Tailwind CSS(basic)'] },
-  { category: 'Backend & Other', items: ['Node.js', 'PHP', 'MySQL', 'JavaScript'] },
-  { category: 'Design', items: ['Figma', 'UI/UX Design', '3D Modeling', 'Web Design'] },
+  { category: 'Graphic Design', items: ['Brand Identity', 'Social Media Design', 'Print & Packaging', 'Typography'] },
+  { category: 'Design Tools', items: ['Figma', 'UI/UX Design', '3D Modeling', 'Canva'] },
+  { category: 'Development', items: ['Angular', 'TypeScript', 'Node.js', 'PHP', 'MySQL'] },
   { category: 'Services', items: ['Online Listing of Product', 'E-commerce Setup', 'SEO'] },
 ];
 

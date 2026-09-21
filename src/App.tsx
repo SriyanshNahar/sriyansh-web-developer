@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
-const GlobalScene=React.lazy(()=>import('./components/GlobalScene'));
+import Footer from './components/Footer';
 const Hero=React.lazy(()=>import('./components/Hero'));
 const About=React.lazy(()=>import('./components/About'));
 const Experience=React.lazy(()=>import('./components/Experience'));
@@ -15,10 +15,9 @@ export default function App(){
  return <div className="studioApp">
   <div className={`cinematicLoader ${loaded?'cinematicLoaderHidden':''}`}><div className="loaderMark">SN</div><div className="loaderLine"><span/></div><p>ENTERING THE STUDIO</p></div>
   <div className="filmGrain"/>
-  <Suspense fallback={null}><GlobalScene/></Suspense>
   <Navbar/>
   <main className="buildingJourney"><Suspense fallback={null}>
-   <Hero/><About/><Experience/><Projects/><GraphicDesign/><Skills/><Contact/>
-  </Suspense></main>
+   <Hero/><About/><Experience/><GraphicDesign/><Projects/><Skills/><Contact/>
+  </Suspense><Footer/></main>
  </div>
 }

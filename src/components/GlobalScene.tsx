@@ -16,7 +16,7 @@ const Room=({y,title,sub,kind}:{y:number;title:string;sub:string;kind:'about'|'e
  let content:React.ReactNode;
  if(kind==='about')content=<><M p={[0,-.2,.15]} s={[2.7,.55,.6]} c="#211b16"/><T p={[0,.05,.48]} size={.13}>ABOUT SRIYANSH</T><Plant p={[-3,-.75,.2]}/><Plant p={[3,-.75,.2]}/></>;
  else if(kind==='experience')content=<><Desk/><T p={[-2.6,-.45,.2]} size={.1}>JOURNEY</T><T p={[2.6,-.45,.2]} size={.1}>GROWTH</T></>;
- else if(kind==='projects')content=<>{[-2.7,-.9,.9,2.7].map((x,i)=><group key={x}><M p={[x,-.05,.1]} s={[1.35,1.45,.1]} c={['#263a64','#55335f','#67412b','#1f554f'][i]}/><T p={[x,.1,.17]} size={.11}>PROJECT {i+1}</T></group>)}</>;
+ else if(kind==='projects')content=<>{[-2.7,-.9,.9,2.7].map((x,i)=><group key={x}><M p={[x,-.05,.1]} s={[1.35,1.45,.1]} c={['#263a64','#55335f','#67412b','#1f554f'][i]}/><T p={[x,.1,.17]} size={.11}>{`PROJECT ${i+1}`}</T></group>)}</>;
  else if(kind==='graphics')content=<>{[-2.7,-.9,.9,2.7].map((x,i)=><group key={x}><M p={[x,-.02,.1]} s={[1.35,1.65,.1]} c={['#1f2b4f','#4b274c','#5c3a24','#28483b'][i]}/><T p={[x,.05,.17]} size={.09}>{['BRAND','SOCIAL','PRINT','UI/UX'][i]}</T></group>)}</>;
  else if(kind==='skills')content=<>{[-2.6,-.85,.85,2.6].map((x,i)=><group key={x}><M p={[x,-.1,.1]} s={[1.35,1.25,.12]} c="#171a22"/><T p={[x,.25,.18]} size={.1}>{['FRONTEND','BACKEND','DESIGN','SERVICES'][i]}</T></group>)}</>;
  else content=<><M p={[0,-.2,.15]} s={[3.2,.55,.7]} c="#211b16"/><T p={[0,.05,.5]} size={.16}>LET'S WORK TOGETHER</T><T p={[0,-.55,.32]} size={.08} color="#c8b493">CONTACT · HIRE · START A PROJECT</T><Plant p={[-3,-.75,.2]}/><Plant p={[3,-.75,.2]}/></>;
@@ -30,7 +30,7 @@ const Room=({y,title,sub,kind}:{y:number;title:string;sub:string;kind:'about'|'e
  </group>
 };
 
-const ids=['home','about','experience','projects','graphic-design','skills','contact'];
+const ids=['home','about','experience','graphic-design','projects','skills','contact'];
 const ys=[1.5,-5.4,-2.6,.2,3,5.8,8.6];
 function stageFromScroll(){
  const center=window.innerHeight*.5; let best=0,dist=Infinity;
@@ -48,12 +48,12 @@ const Studio=()=>{const root=useRef<THREE.Group>(null);const target=useRef(new T
    <M p={[-4.05,1.6,-.85]} s={[1.4,17.2,.75]} c="#090b10"/><T p={[-4.05,5.6,-.38]} size={.55}>SN</T><T p={[-4.05,4.85,-.38]} size={.12}>STUDIO</T><T p={[-4.05,3.85,-.38]} size={.075} color="#aaaeb7">SCROLL THE STORY</T>
    <Room y={-5.4} title="GROUND FLOOR · ABOUT" sub="THE PERSON BEHIND THE STUDIO" kind="about"/>
    <Room y={-2.6} title="FIRST FLOOR · EXPERIENCE" sub="THE JOURNEY & GROWTH" kind="experience"/>
-   <Room y={.2} title="SECOND FLOOR · PROJECTS" sub="SELECTED DIGITAL WORK" kind="projects"/>
-   <Room y={3} title="THIRD FLOOR · GRAPHIC DESIGN" sub="THE VISUAL GALLERY" kind="graphics"/>
+   <Room y={.2} title="SECOND FLOOR · GRAPHIC DESIGN" sub="THE VISUAL GALLERY" kind="graphics"/>
+   <Room y={3} title="THIRD FLOOR · PROJECTS" sub="SELECTED DIGITAL WORK" kind="projects"/>
    <Room y={5.8} title="FOURTH FLOOR · SKILLS" sub="THE TOOLS BEHIND THE WORK" kind="skills"/>
    <Room y={8.6} title="FIFTH FLOOR · CONTACT" sub="LET'S BUILD SOMETHING TOGETHER" kind="contact"/>
    <M p={[0,10.2,-.5]} s={[9.9,.2,.9]} c="#1a1d23"/>
-   {[-6.8,-4,-1.2,1.6,4.4,7.2,10].map((y,i)=><group key={y}><M p={[0,y,-.02]} s={[10.1,.055,.55]} c="#2a2d34"/><M p={[-5.1,y+.55,-.12]} s={[.16,1.05,.7]} c="#11141a"/><M p={[5.1,y+.55,-.12]} s={[.16,1.05,.7]} c="#11141a"/></group>)}{[-3.5,-2.5,-1.5,-.5,.5,1.5,2.5,3.5].map(x=><M key={x} p={[x,10.7,-.05]} s={[.08,.9,.9]} c="#272a31"/>)}
+   {[-6.8,-4,-1.2,1.6,4.4,7.2,10].map(y=><group key={y}><M p={[0,y,-.02]} s={[10.1,.055,.55]} c="#2a2d34"/><M p={[-5.1,y+.55,-.12]} s={[.16,1.05,.7]} c="#11141a"/><M p={[5.1,y+.55,-.12]} s={[.16,1.05,.7]} c="#11141a"/></group>)}{[-3.5,-2.5,-1.5,-.5,.5,1.5,2.5,3.5].map(x=><M key={x} p={[x,10.7,-.05]} s={[.08,.9,.9]} c="#272a31"/>)}
    <T p={[0,11.1,-.15]} size={.22}>ROOFTOP · CLIENT MEETING SPACE</T>
    <M p={[0,10.55,.4]} s={[4.2,.16,1.6]} c="#2a241c"/><M p={[0,10.9,.42]} s={[2.6,.48,.62]} c="#171a20"/><T p={[0,11.02,.78]} size={.1}>CLIENT LOUNGE</T>
    <Plant p={[-3.7,10.45,.35]}/><Plant p={[3.7,10.45,.35]}/><Sign p={[-3.2,10.9,.18]}>CREATE</Sign><Sign p={[3.2,10.9,.18]}>CONNECT</Sign>
