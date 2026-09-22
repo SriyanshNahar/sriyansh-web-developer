@@ -88,24 +88,14 @@ export default function AboutUsSection({
       ref={sectionRef}
       className="w-full py-24 px-4 text-[var(--text-primary)] overflow-hidden relative"
     >
-      {/* Decorative parallax blobs */}
+      {/* Ambient glow */}
       <motion.div
-        className="absolute top-20 left-10 w-64 h-64 rounded-full bg-[var(--accent-color)]/5 blur-3xl"
+        className="absolute top-20 left-10 w-64 h-64 rounded-full bg-[var(--accent-color)]/5 blur-3xl pointer-events-none"
         style={{ y: y1, rotate: rotate1 }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-white/5 blur-3xl"
+        className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-white/5 blur-3xl pointer-events-none"
         style={{ y: y2, rotate: rotate2 }}
-      />
-      <motion.div
-        className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-[var(--accent-color)]/30"
-        animate={{ y: [0, -15, 0], opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-1/3 right-1/4 w-6 h-6 rounded-full bg-white/20"
-        animate={{ y: [0, 20, 0], opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
       />
 
       <motion.div
@@ -153,7 +143,7 @@ export default function AboutUsSection({
           </div>
 
           <div className="flex justify-center items-center order-first md:order-none mb-8 md:mb-0">
-            <motion.div className="relative w-full max-w-sm" variants={itemVariants}>
+            <motion.div className="relative w-full max-w-sm group/photo" variants={itemVariants}>
               <motion.div
                 className="relative rounded-md overflow-hidden shadow-xl aspect-[4/5]"
                 initial={{ scale: 0.9, opacity: 0 }}
@@ -162,53 +152,22 @@ export default function AboutUsSection({
                 whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
               >
                 <img src={imageSrc} alt={imageAlt} className="w-full h-full object-cover object-[50%_22%]" />
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center p-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.9 }}
-                >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent flex items-end justify-center pb-6 opacity-0 group-hover/photo:opacity-100 transition-opacity duration-300">
                   <motion.a
                     href={portfolioHref}
-                    className="bg-white text-[#111] px-4 py-2 rounded-full flex items-center gap-2 text-sm font-medium"
+                    className="bg-[var(--accent-color)] text-[#111] px-4 py-2 rounded-full flex items-center gap-2 text-sm font-medium"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     {portfolioLabel} <ArrowRight className="w-4 h-4" />
                   </motion.a>
-                </motion.div>
+                </div>
               </motion.div>
               <motion.div
                 className="absolute inset-0 border-4 border-white/15 rounded-md -m-3 z-[-1]"
                 initial={{ opacity: 0, scale: 1.1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-              />
-
-              <motion.div
-                className="absolute -top-4 -right-8 w-16 h-16 rounded-full bg-[var(--accent-color)]/10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.9 }}
-                style={{ y: y1 }}
-              />
-              <motion.div
-                className="absolute -bottom-6 -left-10 w-20 h-20 rounded-full bg-white/10"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1.1 }}
-                style={{ y: y2 }}
-              />
-
-              <motion.div
-                className="absolute -top-10 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[var(--accent-color)]"
-                animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-white/40"
-                animate={{ y: [0, 10, 0], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 0.5 }}
               />
             </motion.div>
           </div>
