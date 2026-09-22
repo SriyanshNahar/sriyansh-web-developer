@@ -1,0 +1,5 @@
+/* Utilities only — Tailwind's preflight (base reset) is intentionally
+   skipped here so it doesn't clash with the hand-rolled global reset
+   and design system already in index.css. */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);

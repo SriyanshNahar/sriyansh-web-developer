@@ -69,9 +69,17 @@ export default function MetroHero({
     let hasStartedScrolling = false
     let isSeeking = false
     let pendingTime: number | null = null
-    let locked = false
     let lockedScrollY = 0
     let touchStartY = 0
+
+    // React 18 StrictMode mounts effects twice in dev, each with its own
+    // closure — a local `locked` boolean would go out of sync with the
+    // real DOM across those two instances. Reading document.body itself
+    // keeps engageLock/releaseLock idempotent no matter which closure
+    // (or how many) call them.
+    function isLocked() {
+      return typeof document !== "undefined" && document.body.style.position === "fixed"
+    }
 
     const onLoadedData = () => {
       duration = video.duration || 0
@@ -121,8 +129,7 @@ export default function MetroHero({
     // video finishes and the user keeps pushing forward; re-engaged if
     // they scroll back up into the section.
     function engageLock() {
-      if (locked || typeof document === "undefined") return
-      locked = true
+      if (isLocked() || typeof document === "undefined") return
       lockedScrollY = window.scrollY
       const b = document.body.style
       b.position = "fixed"
@@ -135,8 +142,7 @@ export default function MetroHero({
     }
 
     function releaseLock() {
-      if (!locked || typeof document === "undefined") return
-      locked = false
+      if (!isLocked() || typeof document === "undefined") return
       const y = lockedScrollY
       const b = document.body.style
       b.position = ""
@@ -166,7 +172,7 @@ export default function MetroHero({
     }
 
     const onWheel = (e: WheelEvent) => {
-      if (!locked) {
+      if (!isLocked()) {
         if (e.deltaY < 0 && sectionAtTop()) {
           engageLock()
           targetProgress = 1
@@ -191,7 +197,7 @@ export default function MetroHero({
       const deltaY = touchStartY - y
       touchStartY = y
 
-      if (!locked) {
+      if (!isLocked()) {
         if (deltaY < 0 && sectionAtTop()) {
           engageLock()
           targetProgress = 1

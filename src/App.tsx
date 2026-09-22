@@ -5,6 +5,7 @@ const Hero=React.lazy(()=>import('./components/Hero'));
 const About=React.lazy(()=>import('./components/About'));
 const Experience=React.lazy(()=>import('./components/Experience'));
 const Projects=React.lazy(()=>import('./components/Projects'));
+const ProjectsIntro=React.lazy(()=>import('./components/ProjectsIntro'));
 const GraphicDesign=React.lazy(()=>import('./components/GraphicDesign'));
 const Skills=React.lazy(()=>import('./components/Skills'));
 const Contact=React.lazy(()=>import('./components/Contact'));
@@ -17,7 +18,7 @@ export default function App(){
   <div className="filmGrain"/>
   <Navbar/>
   <main className="buildingJourney"><Suspense fallback={null}>
-   <Hero/><About/><Experience/><GraphicDesign/><Projects/><Skills/><Contact/>
+   <Hero/><About/><Experience/><GraphicDesign/><ProjectsIntro/><Projects/><Skills/><Contact/>
   </Suspense><Footer/></main>
  </div>
 }
