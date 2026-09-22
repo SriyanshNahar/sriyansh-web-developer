@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <div id="home">
       <MetroHero
-        title="I DESIGN VISUALS"
+        title="SRIYANSH NAHAR STUDIO"
         tagline="Brand identity, social media & UI/UX — scroll to see the studio open."
         scrollHint="SCROLL"
         signature={false}
