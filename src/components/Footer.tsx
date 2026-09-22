@@ -1,25 +1,26 @@
+import { profile } from "@/lib/profile";
 
-import styles from './Footer.module.css';
-
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
-        <div className={styles.top}>
-          <div><h2 className={styles.logo}>SRIYANSH NAHAR</h2><p className={styles.tagline}>Graphic Designer & Creative Studio</p></div>
-          <div className={styles.socials}>
-            <a href="https://www.linkedin.com/in/sriyansh-nahar" target="_blank" rel="noreferrer" className={styles.link}>LinkedIn</a>
-            <a href="https://www.instagram.com/sriyanshjain_04/?__pwa=1" target="_blank" rel="noreferrer" className={styles.link}>Instagram</a>
-            <a href="https://www.facebook.com/share/1B2XeMYrSk/" target="_blank" rel="noreferrer" className={styles.link}>Facebook</a>
-          </div>
-        </div>
-        <div className={styles.bottom}>
-          <p className={styles.copy}>&copy; {new Date().getFullYear()} Sriyansh Nahar. All rights reserved.</p>
-          <p className={styles.location}>Based in Bhilwara, Rajasthan</p>
-        </div>
+    <footer className="mx-auto flex max-w-[1440px] flex-col justify-between gap-5 px-5 py-10 font-mono text-[11px] uppercase tracking-widest text-muted sm:flex-row sm:items-center sm:px-8 lg:px-12">
+      <span>© 2026 / {profile.name} Studio</span>
+      <div className="flex flex-wrap gap-4">
+        {profile.socials.map((s) => (
+          <a
+            key={s.label}
+            href={s.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-cyan transition-colors"
+          >
+            {s.label}
+          </a>
+        ))}
       </div>
+      <span className="text-violet">Signal stable / {profile.coordinates}</span>
+      <a href="#home" className="hover:text-cyan transition-colors">
+        Back to top ↑
+      </a>
     </footer>
   );
-};
-
-export default Footer;
+}

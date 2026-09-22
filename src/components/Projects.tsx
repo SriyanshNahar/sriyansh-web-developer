@@ -1,128 +1,88 @@
-import { motion } from 'framer-motion';
-import styles from './Projects.module.css';
+"use client";
 
-const projects = [
-  {
-    title: 'Kallakari',
-    category: 'Fashion & Tailoring',
-    description: 'Hassle-Free Custom Clothing. Doorstep measurements, premium stitching, fast delivery — tailored exactly for you.',
-    tags: ['E-Commerce', 'Fashion', 'Custom'],
-    link: 'https://kallakari.in/'
-  },
-  {
-    title: 'Linenry',
-    category: 'Fashion & Apparel',
-    description: 'A sleek, single-page fashion website dedicated to premium linen apparel and styling.',
-    tags: ['Fashion', 'Single Page', 'Web Design'],
-    link: 'https://linenry.netlify.app/'
-  },
-  {
-    title: 'Linenry Form',
-    category: 'Fashion & Apparel',
-    description: 'A dedicated form and intake web application for the Linenry brand.',
-    tags: ['Forms', 'UI/UX', 'Web App'],
-    link: 'https://linenryform.netlify.app/'
-  },
-  {
-    title: 'Mosto BitCoin',
-    category: 'Development Coaches',
-    description: 'A cryptocurrency related platform focused on Bitcoin.',
-    tags: ['Crypto', 'React', 'Web Design'],
-    link: 'https://mosto-bitcoin.netlify.app/'
-  },
-  {
-    title: 'Medicozs',
-    category: 'Development Coaches',
-    description: 'A comprehensive medical and hospital management web application.',
-    tags: ['Healthcare', 'Web App', 'UI/UX'],
-    link: 'https://medicoz-hospital.netlify.app/'
-  },
-  {
-    title: 'Gamics Master',
-    category: 'Development Coaches',
-    description: 'A dynamic gaming platform with interactive features and sleek design.',
-    tags: ['Gaming', 'Frontend', 'Design'],
-    link: 'https://gamicsmaster.netlify.app/'
-  },
-  {
-    title: 'Nike Jordens',
-    category: 'Development Coaches',
-    description: 'An e-commerce style landing page specifically built for Nike Jordans.',
-    tags: ['E-Commerce', 'Landing Page', 'Sneakers'],
-    link: 'https://nikejordene.netlify.app/'
-  },
-  {
-    title: 'AArvi Diamonds Jewellery',
-    category: 'Development Coaches',
-    description: 'A premium jewelry website showcasing high-end diamond products.',
-    tags: ['Jewelry', 'Premium', 'Listing'],
-    link: 'https://aarvidiamondsjewellery.netlify.app/'
-  },
-  {
-    title: 'Old Portfolio',
-    category: 'Development Coaches',
-    description: 'My previous portfolio website showcasing earlier work and designs.',
-    tags: ['Portfolio', 'HTML', 'CSS'],
-    link: 'https://oldportfolioo.netlify.app/'
-  },
-  {
-    title: 'Hostel Management System',
-    category: 'Management Systems',
-    description: 'A comprehensive portal where students can view their allocated rooms and fees. Includes a full admin dashboard to manage student additions, price configurations, and automated room allocation. Built as my final year college project.',
-    tags: ['Admin Panel', 'Dashboard', 'Full-Stack']
-  },
-  {
-    title: 'Tour and Travel',
-    category: 'Booking Platforms',
-    description: 'A travel and hotel booking platform inspired by MakeMyTrip (MMT), allowing users to explore and book tours seamlessly.',
-    tags: ['Travel', 'Booking', 'E-Commerce']
-  }
-];
+import { useState } from "react";
+import Reveal from "./Reveal";
+import { webProjects, filters } from "@/lib/webProjects";
 
-const Projects = () => {
+export default function Projects() {
+  const [active, setActive] = useState<(typeof filters)[number]["id"]>("all");
+
+  const visible =
+    active === "all" ? webProjects : webProjects.filter((p) => p.filter === active);
+
   return (
-    <section id="projects" className="section-container">
-      <div className={styles.header}>
-        <span className="mono-text accent-text">WEB DEVELOPMENT WORK</span>
-        <h2 className={styles.heading}>THE DEV<br/><em>WORK.</em></h2>
-        <p className={styles.intro}>Beyond design, I also build the websites and digital experiences that bring the visuals to life.</p>
-      </div>
+    <section id="projects" className="mx-auto max-w-[1440px] px-5 py-28 sm:px-8 lg:px-12 lg:py-40">
+      <Reveal className="mb-10 max-w-2xl">
+        <p className="font-mono text-xs uppercase tracking-widest text-cyan">
+          05 / The dev work
+        </p>
+        <h2 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+          Things I&apos;ve built
+          <br />
+          in the wild.
+        </h2>
+        <p className="mt-4 text-sm text-muted sm:text-base">
+          Beyond design, I build the systems and digital experiences that bring a visual
+          point of view to life.
+        </p>
+      </Reveal>
 
-      <div className={styles.container}>
-        <div className={styles.projectsList}>
-          {projects.map((project, index) => (
-            <motion.div 
-              key={index}
-              className={styles.projectCard}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              onClick={() => project.link && window.open(project.link, '_blank')}
-            >
-              <div className={styles.cardHeader}><span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
-                <span className={styles.category}>{project.category}</span>
-                <h3 className={styles.projectTitle}>
-                  {project.link ? (
-                    <a href={project.link} target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
-                      {project.title} ↗
-                    </a>
-                  ) : (
-                    project.title
-                  )}
-                </h3>
-              </div><div className={styles.projectBody}><p className={styles.projectDesc}>{project.description}</p>
-              <div className={styles.tags}>{project.tags.map(tag => (<span key={tag} className={styles.tag}>{tag}</span>))}</div>{project.link && <span className={styles.viewProject}>VIEW PROJECT ↗</span>}</div></motion.div>
-          ))}
-        </div>
+      <Reveal delay={0.1} className="mb-12 flex flex-wrap gap-2">
+        {filters.map((f) => (
+          <button
+            key={f.id}
+            onClick={() => setActive(f.id)}
+            className={`rounded-full border px-4 py-2 font-mono text-[11px] uppercase tracking-widest transition-colors ${
+              active === f.id
+                ? "border-cyan bg-cyan/10 text-cyan"
+                : "border-hairline text-muted hover:border-cyan/50 hover:text-cyan"
+            }`}
+          >
+            {f.label}
+          </button>
+        ))}
+      </Reveal>
 
-        <div className={styles.visualColumn}>
-          {/* GlobalScene handles the 3D visual */}
-          <div className={styles.reflectionEffect}></div>
-        </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {visible.map((p, i) => (
+          <Reveal key={p.id} delay={(i % 3) * 0.08} className="h-full">
+            <div className="flex h-full flex-col rounded border border-hairline bg-panel/60 p-6 transition-colors hover:border-cyan/40">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-violet">
+                {p.index} / {p.category}
+              </p>
+              <h3 className="mt-3 text-xl font-semibold">{p.title}</h3>
+              <p className="mt-2 flex-1 text-sm text-muted">{p.description}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {p.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-hairline px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+              {p.url ? (
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-widest text-cyan hover:underline"
+                >
+                  View project ↗
+                </a>
+              ) : (
+                <a
+                  href="#contact"
+                  className="mt-6 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-widest text-muted hover:text-cyan"
+                >
+                  Ask for the case study →
+                </a>
+              )}
+            </div>
+          </Reveal>
+        ))}
       </div>
     </section>
   );
-};
-
-export default Projects;
+}
