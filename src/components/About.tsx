@@ -13,7 +13,7 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import AboutUsSection, { type AboutService, type AboutStat } from './ui/about-us-section';
-import truebatchFront from '../assets/design-work/truebatch-front.jpg';
+import sriyanshPortrait from '../assets/profile/sriyansh-portrait.webp';
 
 const services: AboutService[] = [
   {
@@ -74,8 +74,8 @@ export default function About() {
       heading="About Me"
       intro="I'm Sriyansh Nahar — a graphic designer who thinks in colour, type and composition. I craft brand identities, social media design, print & packaging and UI/UX visuals, and I also happen to build the websites that show them off."
       services={services}
-      imageSrc={truebatchFront}
-      imageAlt="TrueBatch flour packaging design"
+      imageSrc={sriyanshPortrait}
+      imageAlt="Sriyansh Nahar"
       portfolioHref="#graphic-design"
       portfolioLabel="My Portfolio"
       stats={stats}

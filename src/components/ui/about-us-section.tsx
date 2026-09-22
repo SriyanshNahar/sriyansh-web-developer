@@ -153,15 +153,15 @@ export default function AboutUsSection({
           </div>
 
           <div className="flex justify-center items-center order-first md:order-none mb-8 md:mb-0">
-            <motion.div className="relative w-full max-w-xs" variants={itemVariants}>
+            <motion.div className="relative w-full max-w-sm" variants={itemVariants}>
               <motion.div
-                className="rounded-md overflow-hidden shadow-xl"
+                className="relative rounded-md overflow-hidden shadow-xl aspect-[4/5]"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
                 whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
               >
-                <img src={imageSrc} alt={imageAlt} className="w-full h-full object-cover" />
+                <img src={imageSrc} alt={imageAlt} className="w-full h-full object-cover object-[50%_22%]" />
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center p-4"
                   initial={{ opacity: 0 }}
