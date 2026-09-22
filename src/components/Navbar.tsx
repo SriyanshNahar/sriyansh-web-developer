@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './Navbar.module.css';
-const links=[['BUILDING','#home'],['ABOUT','#about'],['EXPERIENCE','#experience'],['DESIGN','#graphic-design'],['DEV WORK','#projects'],['SKILLS','#skills'],['CONTACT','#contact']];
+const links=[['BUILDING','#home'],['ABOUT','#about'],['DESIGN','#graphic-design'],['DEV WORK','#projects'],['SKILLS','#skills'],['CONTACT','#contact']];
 export default function Navbar(){
  const [open,setOpen]=useState(false),[scrolled,setScrolled]=useState(false);
  useEffect(()=>{const f=()=>setScrolled(scrollY>30);addEventListener('scroll',f,{passive:true});return()=>removeEventListener('scroll',f)},[]);
