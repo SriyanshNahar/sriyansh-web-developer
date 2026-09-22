@@ -1,4 +1,3 @@
-import styles from './StudioFloor.module.css';
 import { ZoomSliderComp, type ZoomSliderItem } from './ui/zoom-slider';
 import truebatchFront from '../assets/design-work/truebatch-front.jpg';
 import truebatchBack from '../assets/design-work/truebatch-back.jpg';
@@ -16,11 +15,7 @@ const experienceSlides: ZoomSliderItem[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="section-container">
-      <div className={styles.header}>
-        <span className="mono-text accent-text">FIRST FLOOR // EXPERIENCE</span>
-        <h2>THE JOURNEY<br /><em>SO FAR.</em><small>Experience lives on this floor.</small></h2>
-      </div>
+    <section id="experience">
       <ZoomSliderComp sliderData={experienceSlides} />
     </section>
   );

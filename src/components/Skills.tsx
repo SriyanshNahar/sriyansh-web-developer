@@ -12,8 +12,8 @@ const Skills = () => {
   return (
     <section id="skills" className="section-container">
       <div className={styles.header}>
-        <span className="mono-text accent-text">FOURTH FLOOR // SKILLS</span>
-        <h2 className={styles.heading}>THE SKILLS<br/>FLOOR.</h2>
+        <span className="mono-text accent-text">SKILLS</span>
+        <h2 className={styles.heading}>THE SKILLS<br/>SET.</h2>
       </div>
 
       <div className={styles.layoutGrid}>

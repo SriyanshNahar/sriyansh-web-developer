@@ -83,8 +83,8 @@ const Projects = () => {
   return (
     <section id="projects" className="section-container">
       <div className={styles.header}>
-        <span className="mono-text accent-text">THIRD FLOOR // WEB DEVELOPMENT WORK</span>
-        <h2 className={styles.heading}>THE DEV<br/><em>FLOOR.</em></h2>
+        <span className="mono-text accent-text">WEB DEVELOPMENT WORK</span>
+        <h2 className={styles.heading}>THE DEV<br/><em>WORK.</em></h2>
         <p className={styles.intro}>Beyond design, I also build the websites and digital experiences that bring the visuals to life.</p>
       </div>
 

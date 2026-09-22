@@ -28,7 +28,7 @@ const Contact = () => {
   return (
     <section id="contact" className="section-container">
       <div className={styles.header}>
-        <span className="mono-text accent-text">FIFTH FLOOR // CONTACT</span>
+        <span className="mono-text accent-text">CONTACT</span>
         <h2 className={styles.heading}>LET'S DESIGN<br/>SOMETHING TOGETHER.</h2>
       </div>
 
