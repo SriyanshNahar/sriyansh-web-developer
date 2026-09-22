@@ -1,8 +1,8 @@
 import HeroScrollAnimation from './ui/hero-scroll-animation';
-import trumatchFront from '../assets/design-work/trumatch-front.jpg';
-import trumatchBack from '../assets/design-work/trumatch-back.jpg';
-import loundryFront from '../assets/design-work/loundry-front.jpg';
-import vateenGheeFront from '../assets/design-work/vateen-ghee-front.jpg';
+import truebatchFront from '../assets/design-work/truebatch-front.jpg';
+import truebatchBack from '../assets/design-work/truebatch-back.jpg';
+import loundryco from '../assets/design-work/loundryco.jpg';
+import choosekindMailer from '../assets/design-work/choosekind-mailer.jpg';
 
 const ProjectsIntro = () => {
   return (
@@ -10,10 +10,10 @@ const ProjectsIntro = () => {
       section1Title={<>THINGS I'VE BUILT <br /> IN GRAPHIC. SCROLL 👇</>}
       section2Title={<>Real packaging & brand identity, <br /> shipped to print.</>}
       images={[
-        { src: trumatchFront, alt: 'TrueBatch flour packaging design' },
-        { src: trumatchBack, alt: 'TrueBatch packaging back panel' },
-        { src: loundryFront, alt: 'LoundryCo laundry bag packaging design' },
-        { src: vateenGheeFront, alt: 'Vateen Ghee Ghar packaging design' },
+        { src: truebatchFront, alt: 'TrueBatch flour packaging design' },
+        { src: truebatchBack, alt: 'TrueBatch packaging back panel' },
+        { src: loundryco, alt: 'LoundryCo laundry brand poster design' },
+        { src: choosekindMailer, alt: 'Choose Kind mailer bag packaging design' },
       ]}
       footerText="GRAPHIC DESIGN"
     />
