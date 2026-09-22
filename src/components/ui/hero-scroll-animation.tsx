@@ -61,6 +61,8 @@ const Section2: React.FC<SectionProps & { title: ReactNode; images: ScrollImage[
               key={img.src}
               src={img.src}
               alt={img.alt}
+              loading='lazy'
+              decoding='async'
               className=' object-cover w-full rounded-md h-full'
             />
           ))}

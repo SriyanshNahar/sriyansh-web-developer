@@ -64,6 +64,7 @@ export default function MetroHero({
 
     let duration = 0
     let rafId = 0
+    let rafActive = false
     let targetProgress = 0
     let currentProgress = 0
     let hasStartedScrolling = false
@@ -157,16 +158,32 @@ export default function MetroHero({
 
     engageLock()
 
+    // The rAF loop stops itself once currentProgress settles, instead of
+    // ticking forever — otherwise it repaints transform/filter on five
+    // elements at 60fps for the entire life of the page, long after the
+    // user has scrolled away from the hero. Any code that moves
+    // targetProgress calls this to wake it back up.
+    function wake() {
+      if (rafActive || reduceMotion) return
+      rafActive = true
+      rafId = requestAnimationFrame(frame)
+    }
+
     function addDelta(deltaY: number) {
       const next = clamp(targetProgress + deltaY / scrubDistance, 0, 1)
       targetProgress = next
       if (targetProgress > 0.001) hasStartedScrolling = true
+      wake()
       return true
     }
 
     // Section is parked at the top edge of the viewport — the point at
     // which scrolling back up should re-engage the lock.
     function sectionAtTop() {
+      // Cheap check first — window.scrollY doesn't force a layout read,
+      // getBoundingClientRect() does. Skips that reflow on every upward
+      // wheel/touch tick while the user is scrolling up from far below.
+      if (window.scrollY > window.innerHeight * 1.5) return false
       const rect = section!.getBoundingClientRect()
       return rect.top > -4 && rect.top < 4
     }
@@ -177,6 +194,7 @@ export default function MetroHero({
           engageLock()
           targetProgress = 1
           currentProgress = 1
+          wake()
           e.preventDefault()
         }
         return
@@ -202,6 +220,7 @@ export default function MetroHero({
           engageLock()
           targetProgress = 1
           currentProgress = 1
+          wake()
           e.preventDefault()
         }
         return
@@ -255,12 +274,15 @@ export default function MetroHero({
         progressBarRef.current.style.transform = `scaleX(${currentProgress})`
       }
 
+      if (Math.abs(targetProgress - currentProgress) < 0.0005) {
+        currentProgress = targetProgress
+        rafActive = false
+        return
+      }
       rafId = requestAnimationFrame(frame)
     }
 
-    if (!reduceMotion) {
-      rafId = requestAnimationFrame(frame)
-    }
+    wake()
 
     return () => {
       video.removeEventListener("loadeddata", onLoadedData)
